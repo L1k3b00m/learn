@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StreamTokenizer;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class bellman_ford_SPFA {
     static int[] dist;
 
@@ -25,11 +28,13 @@ public class bellman_ford_SPFA {
             add_edge(getInt(),getInt(),getInt());
         }
         bellman_ford(s);
+        //SPFA(s);
         for(int i = 1; i <= n;i++){
-            System.out.println(dist[i]);
+            System.out.print(dist[i] + " ");
         }
     }
     static void bellman_ford(int s){
+        long strat = System.nanoTime();
         Arrays.fill(dist,0xffff);
         dist[s] = 0;
         //枚举n-1次
@@ -54,11 +59,29 @@ public class bellman_ford_SPFA {
                 break;
             }
         }
+        System.out.println(System.nanoTime() - strat);
     }
     static void SPFA(int s){
+        long start = System.nanoTime();
         //基于队列优化的Bellman-Ford算法
-        
+        Arrays.fill(dist,0xffff);
+        dist[s] = 0;
+        //入队{v,
+        Queue<Integer> que = new LinkedList<>();
+        que.add(s);
+        while(!que.isEmpty()){
+            int u = que.poll();
+            //遍历该点的邻接边
+            for(int i = head[u]; i != -1;i = edges[i].next){
+                if(dist[edges[i].to] > dist[u] + edges[i].weight){
+                    dist[edges[i].to] = dist[u] + edges[i].weight;
+                    que.add(edges[i].to);
+                }
+            }
+        }
+        System.out.println(System.nanoTime() - start);
     }
+
     static int getInt(){
         try {
             stk.nextToken();
