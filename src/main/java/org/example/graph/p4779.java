@@ -1,10 +1,10 @@
-package org.example;
+package org.example.graph;
 
 import java.io.*;
 import java.util.*;
 
 public class p4779 {
-    private static StreamTokenizer stk = new StreamTokenizer(new BufferedReader(new InputStreamReader(System.in)));
+    private static final StreamTokenizer stk = new StreamTokenizer(new BufferedReader(new InputStreamReader(System.in)));
     static int[] head = new int[2 * (int)1e5 + 1];
     static  int cnt = 0;
     static  int n;
@@ -123,7 +123,7 @@ public class p4779 {
             if(vis[u]) continue;//将该点置为已访问
             vis[u] = true;
             //遍历该点的所有邻接点
-            for(int i = head[u]; i != -1; i = edges[i].next){;
+            for(int i = head[u]; i != -1; i = edges[i].next){
                 int v = edges[i].to;//到达点
                 //如果dist[到达点] > 当前点的最短距离+到达下一个点的距离 置换
                 if(dist[v] > w + edges[i].weight){

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.graph;
 import java.util.*;
 
 public class p1117 {
@@ -48,8 +48,8 @@ public class p1117 {
     }
 }
 class p{
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     p(int x,int y){
         this.x = x;
         this.y = y;

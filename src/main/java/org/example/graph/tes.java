@@ -1,4 +1,4 @@
-package org.example;
+package org.example.graph;
 
 import java.util.Stack;
 
@@ -47,7 +47,7 @@ public class tes {
             for(int[] VT : map){//VT = {起点，终点，权重}
                 if(VT[0] == V){//寻找V的邻接节点
                     if(VT[1] != Integer.MAX_VALUE)//需要做约束，要不然不存在的边会爆数组
-                        if(Col[VT[1]] == false){//未访问过的节点
+                        if(!Col[VT[1]]){//未访问过的节点
                             if(dist[V] + VT[2] < dist[VT[1]] ){//V权重+VT权重 < 原有权重，则更新
                                 dist[VT[1]] = dist[V] + VT[2];//更新
                                 path[VT[1]] = V;//路径更新
@@ -62,7 +62,7 @@ public class tes {
         int minDist = Integer.MAX_VALUE;
         int minV = 0;
         for(int[] VT : map){//VT = {起点，终点，权重}
-            if(col[VT[0]] == false && dist[VT[0]] < minDist){
+            if(!col[VT[0]] && dist[VT[0]] < minDist){
                 minDist = dist[VT[0]];
                 minV = VT[0];
             }
