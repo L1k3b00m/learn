@@ -1,24 +1,29 @@
 package othet;
+
+import java.util.*;
+
 /**
  *
  * 计算类
  *
  * **/
 public class calu {
-    static int mod = 1000000007;
+
     public static void main(String[] args) {
-        System.out.println(2024*2.5);
-    }
-    static long fpow(int a,int b){
-        long res = 1;
-        a%= 7;
-        while (b >0){
-            if(b%2 == 1){
-                res = res * a % 7;
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] dp = new int[1010][1010];
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= i; j++){
+                dp[i][j] = sc.nextInt();
             }
-            a = a * a % 7;
-            b/=2;
         }
-        return res;
+        for(int i = n-1;i >= 1;i--){
+            for(int j = 1;j <= i;j++){
+                dp[i][j] = dp[i][j] + Math.max(dp[i+1][j],dp[i+1][j+1]);
+            }
+        }
+        System.out.println(dp[1][1]);
+
     }
 }
